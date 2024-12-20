@@ -3,6 +3,20 @@ Config = {}
 -- Location of the robbery
 Config.RobberyLocation = vector3(3089.673828, -4725.548340, 26.966164) -- Replace with actual coordinates
 
+
+Config.RequiredItems = {
+    { item = "trojan_usb", amount = 1 } -- Example: requires 1 USB
+}
+
+-- Progress bar duration (in seconds)
+Config.ProgressBarDuration = 8
+
+-- Animation details
+Config.HackingAnimation = {
+    dict = "anim@heists@ornate_bank@hack",
+    clip = "hack_enter"
+}
+
 -- Lootable boxes near the robbery location
 Config.LootableBoxes = {
     { coords = vector3(3124.472900, -4800.571289, 14.266785), reward = { item = 'goldbar', amount = 2 } },

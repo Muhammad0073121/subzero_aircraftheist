@@ -12,6 +12,17 @@ RegisterNetEvent('custom-robbery:startRobberyAttempt', function()
     local source = source
     local xPlayer = QBCore.Functions.GetPlayer(source)
 
+    for _, item in ipairs(Config.RequiredItems) do
+        if xPlayer.Functions.GetItemByName(item.item).count < item.amount then
+            TriggerClientEvent('QBCore:Notify', source, 'You do not have the required items!', 'error')
+            return
+        end
+    end
+
+    for _, item in ipairs(Config.RequiredItems) do
+        xPlayer.Functions.RemoveItem(item.item, item.amount)
+    end
+
 
     if RobberyInProgress then
         TriggerClientEvent('QBCore:Notify', source, 'Robbery is already in progress!', 'error')

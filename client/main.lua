@@ -11,13 +11,33 @@ exports.ox_target:addSphereZone({
             name = 'start_robbery',
             label = 'Start Robbery',
             icon = 'fa-solid fa-sack-dollar',
-            serverEvent = 'custom-robbery:startRobberyAttempt',
+            event = 'custom-robbery:startHacking',
             canInteract = function(entity, distance, zone)
                 return not IsRobberyActive
             end
         }
     }
 })
+
+RegisterNetEvent('custom-robbery:startHacking', function(data)
+    if lib.progressBar({
+            duration = Config.ProgressBarDuration * 1000,
+            label = 'Hacking...',
+            useWhileDead = false,
+            canCancel = true,
+            disable = {
+                car = true,
+                movement = true,
+                combat = true,
+                mouse = false
+            },
+            anim = Config.HackingAnimation,
+        }) then
+        TriggerServerEvent('custom-robbery:startRobberyAttempt')
+    else
+        QBCore.Functions.Notify('Robbery Cancelled', 'error')
+    end
+end)
 
 -- Start robbery event
 RegisterNetEvent('custom-robbery:startRobbery', function(duration)
